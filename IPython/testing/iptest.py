@@ -565,6 +565,9 @@ def run_iptestall(inc_slow=False):
 
 
 def main():
+    if ("--help" in sys.argv) or ("-h" in sys.argv):
+        run_iptest()
+        return
     for arg in sys.argv[1:]:
         if arg.startswith('IPython'):
             # This is in-process
