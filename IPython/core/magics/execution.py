@@ -548,12 +548,12 @@ python-profiler package from non-free.""")
                     stats = self.prun('', None, False, opts, arg_lst, prog_ns)
                 else:
                     if 'd' in opts:
-                        deb = debugger.Pdb(self.shell.colors)
                         # reset Breakpoint state, which is moronically kept
                         # in a class
                         bdb.Breakpoint.next = 1
                         bdb.Breakpoint.bplist = {}
                         bdb.Breakpoint.bpbynumber = [None]
+                        deb = debugger.Pdb(self.shell.colors)
                         # Set an initial breakpoint to stop execution
                         maxtries = 10
                         bp_file, bp_line = parse_breakpoint(opts.get('b', ['1'])[0], filename)
