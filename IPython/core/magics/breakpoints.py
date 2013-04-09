@@ -86,7 +86,7 @@ class BreakPointMagics(Magics):
     @magic_arguments.argument('filename', type=str, default=None,
                               help='Filename where breakpoint should be set. '
                                    'Can also be a module specificiation.')
-    @magic_arguments.argument('linenumber', type=int, nargs="?", default=None,
+    @magic_arguments.argument('linenumber', type=str, nargs="?", default=None,
                               help='Linenumber for break point')
     @magic_arguments.argument('-t', '--temporary', dest="temporary",
                               action='store_true',
