@@ -779,9 +779,12 @@ python-profiler package from non-free.""")
         deb = debugger.Pdb(self.shell.colors)
         # reset Breakpoint state, which is moronically kept
         # in a class
+        bplist = self.shell.magics_manager.magics["line"]["bpadd"].im_self.breakpointlist
+        self.shell.magics_manager.magics["line"]["bpadd"].im_self.bplist
         bdb.Breakpoint.next = 1
         bdb.Breakpoint.bplist = {}
         bdb.Breakpoint.bpbynumber = [None]
+
         if bp_line is not None:
             # Set an initial breakpoint to stop execution
             maxtries = 10
@@ -805,6 +808,14 @@ python-profiler package from non-free.""")
             # Mimic Pdb._runscript(...)
             deb._wait_for_mainpyfile = True
             deb.mainpyfile = deb.canonic(filename)
+
+        for bp in bplist:
+            deb.set_break(bp.filename, bp.lineno, bp.temporary,
+                          bp.cond, bp.funcname)
+
+        # Mimic Pdb._runscript(...)
+        deb._wait_for_mainpyfile = True
+        deb.mainpyfile = deb.canonic(filename)
 
         # Start file run
         print("NOTE: Enter 'c' at the %s prompt to continue execution." % deb.prompt)

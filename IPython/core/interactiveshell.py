@@ -2148,6 +2148,7 @@ class InteractiveShell(SingletonConfigurable):
             m.ConfigMagics, m.DeprecatedMagics, m.DisplayMagics, m.ExecutionMagics,
             m.ExtensionMagics, m.HistoryMagics, m.LoggingMagics,
             m.NamespaceMagics, m.OSMagics, m.PylabMagics, m.ScriptMagics,
+            m.BreakPointMagics,
         )
 
         # Register Magic Aliases

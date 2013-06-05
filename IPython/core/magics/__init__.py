@@ -27,7 +27,7 @@ from .namespace import NamespaceMagics
 from .osm import OSMagics
 from .pylab import PylabMagics
 from .script import ScriptMagics
-
+from .breakpoints import BreakPointMagics
 #-----------------------------------------------------------------------------
 # Magic implementation classes
 #-----------------------------------------------------------------------------
