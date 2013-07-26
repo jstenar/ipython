@@ -676,7 +676,6 @@ python-profiler package from non-free.""")
                     'prog_ns': prog_ns,
                     'filename': get_py_filename(filename),
                 }
-
         try:
             stats = None
             with self.shell.readline_no_record:
@@ -803,19 +802,15 @@ python-profiler package from non-free.""")
                     raise UsageError(msg)
             # if we find a good linenumber, set the breakpoint
             deb.do_break('%s:%s' % (bp_file, bp_line))
-
         if filename:
             # Mimic Pdb._runscript(...)
             deb._wait_for_mainpyfile = True
             deb.mainpyfile = deb.canonic(filename)
 
-        for bp in bplist:
-            deb.set_break(bp.filename, bp.lineno, bp.temporary,
-                          bp.cond, bp.funcname)
-
-        # Mimic Pdb._runscript(...)
-        deb._wait_for_mainpyfile = True
-        deb.mainpyfile = deb.canonic(filename)
+        for bpobj in bplist:
+            for bp in bpobj.break_points():
+                deb.set_break(bp.filename, bp.lineno, bp.temporary,
+                              bp.cond, bp.funcname)
 
         # Start file run
         print("NOTE: Enter 'c' at the %s prompt to continue execution." % deb.prompt)
