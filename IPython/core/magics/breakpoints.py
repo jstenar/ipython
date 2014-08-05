@@ -1,4 +1,5 @@
 # -*- coding: ISO-8859-1 -*-
+from __future__ import print_function
 import os
 import re
 
@@ -93,9 +94,9 @@ class BreakPointMagics(Magics):
         colwids = [max(x) for x in zip(*[[len(x) for x in bp]
                    for bp in bptxt])]
         colfmts = "  ".join(["%%%ds" % wid for wid in colwids])
-        print "Breakpoints"
+        print("Breakpoints")
         for bp in bptxt:
-            print colfmts % bp
+            print(colfmts % bp)
 
     @magic_arguments.magic_arguments()
     @magic_arguments.argument('bpnum', type=int, default=None,
@@ -107,10 +108,10 @@ class BreakPointMagics(Magics):
         args = magic_arguments.parse_argstring(self.bprm, line)
         bpnum = args.bpnum - 1
         if args.bpnum > len(self.breakpointlist):
-            print "Error:  bpnum > total number of breakpoints"
+            print("Error:  bpnum > total number of breakpoints")
             return
         elif args.bpnum <= 0:
-            print "Error:  bpnum <= 0"
+            print("Error:  bpnum <= 0")
             return
         del self.breakpointlist[bpnum]
 
@@ -157,11 +158,11 @@ class BreakPointMagics(Magics):
             if len(funcdefs) == 1:
                 linenumber = funcdefs[0][0]
             elif len(funcdefs) == 0:
-                print "Could not find function %r in %r" % (args.funcname,
-                                                            filename)
+                print("Could not find function %r in %r" % (args.funcname,
+                                                            filename))
             else:
-                print ("Multiple definitions of %r in file %r on lines: %r" %
-                       (args.funcname, filename, [x[0] for x in funcdefs]))
+                print("Multiple definitions of %r in file %r on lines: %r" %
+                      (args.funcname, filename, [x[0] for x in funcdefs]))
         elif args.regex:
             linenumber = args.regex
 
